@@ -1,0 +1,199 @@
+/*O uso do * é para informar que todos os elementos da página terão essas especificação 
+
+Margin: espaçamento externo
+padding: espaçamento interno, entre o conteúdo e a borda  do elemento
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.dark {
+  --text-color: white;
+  --bg-url: url(./assets/bg-mobile.jpg);
+  --stroke-color: rgba(255, 255, 255, 0.5);
+  --surface-color: rgba(255, 255, 255, 0.05);
+  --surface-color-hover: rgba(0, 0, 0, 0.02);
+  --highlight-color: rgba(255, 255, 255, 0.2);
+  --switch-bg-url: url(./assets/moon-stars.svg);
+}
+
+.light {
+  --text-color: black;
+  --bg-url: url(./assets/bg-mobile-light.jpg);
+  --stroke-color: rgba(0, 0, 0, 0.5);
+  --surface-color: rgba(255, 255, 255, 0.05);
+  --surface-color-hover: rgba(0, 0, 0, 0.02);
+  --highlight-color: rgba(0, 0, 0, 0.1);
+  --switch-bg-url: url(./assets/sun.svg);
+}
+
+body {
+  /*
+  background-image: url(assets/bg-mobile.jpg);
+  background-repeat: no-repeat; não repetir imagem
+  background-position: top center; colocar imagem centralizada e começando bem em cima da tela (eixo X e Y)
+  background-size: cover; / imagem de adapta conforme o tamanho da tela (em caso de dispositivo pequeno)
+  */
+
+  /*agrupamento background: color image repeat position */
+  background: var(--bg-url) no-repeat top center/cover;
+}
+
+/*O uso do body * informa que todos os elementos dentro de <body> - ou seja, descendentes, receberão as mesma especificações*/
+body * {
+  font-family: "Inter", sans-serif;
+  color: var(--text-color);
+}
+
+#container {
+  width: 360px;
+  margin: 56px auto 0px; /* ajusta as margens de todos os lados, desde que tenha um tamanho fixo determinado*/
+  display: block; /*elemento ocupa toda largura da linha, criando quebra automática antes e depois*/
+  padding: 0px 24px; /*0 em cima e embaixo; 24 nas laterais*/
+}
+
+/*Profile*/
+#profile {
+  text-align: center;
+  padding: 24px; /*Em todos os lados, 24px*/
+}
+
+/*Elementos inline aceitam que o elemento pai tenha um text-align, ou seja, defina qual o posicionamento*/
+/*por isso, acima é ajustado a posição da imagem que foi determinado o tamanho abaixo*/
+
+#profile img {
+  width: 112px;
+}
+
+#profile p {
+  font-weight: 500;
+  line-height: 24px;
+}
+
+/*Switch*/
+
+/*faz com que as propiedades do button abaixo, fiquem apenas dentro do espaço determinado do switch*/
+#switch {
+  position: relative; /*relativizar o position:absolute da classe abaixo*/
+  width: 64px; /*tamanho ocupado pelo switch*/
+
+  margin: 0 auto;
+}
+
+#switch button {
+  width: 32px;
+  height: 32px;
+  background: white var(--switch-bg-url) no-repeat center; /*Fazer efeito button de versões clara e escura*/
+  border: 0;
+  border-radius: 50%;
+
+  position: absolute; /*sobreposicao de camadas*/
+  /*propriedades top, left, right, botton, faz com que a nova camada pode navegar em qualquer lugar da pagina */
+
+  transform: translateY(-50%); /*Alinha o elemento na vertical*/
+
+  top: 50%; /*Ajusta os 50% do topo*/
+
+  /*caso o alinhamento fosse horizontal:
+  right: 50%;
+  transform: translateX(-50%)*/
+  right: 0;
+  z-index: 1; /*Ajusta as camadas em 0 e 1*/
+}
+
+.light #switch button {
+  right: 0;
+  left: initial;
+}
+
+.dark #switch button {
+  left: 0;
+  right: initial;
+}
+
+#switch span {
+  position: center;
+  display: block;
+  width: 64px;
+  height: 24px;
+  /*surface-color-dark-mode*/
+  background: var(--surface-color);
+  border: 1px solid var(--stroke-color);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 9999px;
+}
+
+/* links */
+ul {
+  list-style: none; /*Tira marcação de pontos da lista*/
+
+  display: flex; /*Ajuste flexível*/
+  flex-direction: column; /*Para ficar em coluna*/
+  gap: 16px; /*Espaçamento entre elementos - botões*/
+
+  padding: 24px 0; /*Espaçamento 24 em cima e embaixo; 0 nas laterais*/
+}
+
+ul li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 24px; /*16 em cima e embaix; 24 nas laterais*/
+
+  /*Cores para o botão com plano de fundo  */
+  background: var(
+    --surface-color
+  ); /*255, 255, 255é branco puro e o 0.1 é a transparência (de 0 a 1); Ótimo para efeitos de vidro */
+
+  border: 1px solid var(--stroke-color); /*Cor branca com meia transparência; dá um contorno suave, que combina com fundos translúcidos*/
+  border-radius: 8px; /*borda para o botão*/
+
+  backdrop-filter: blur(4px); /*Forma de desfoque*/
+  -webkit-backdrop-filter: blur(
+    4px
+  ); /*Efeito de desfoque também, mas o prefixo de "webkit" é para compatibilidade com navegadores Safari*/
+
+  text-decoration: none; /*Remover sublinhado do link*/
+  font-weight: 500; /*Quando for acima de 400, é bold*/
+
+  /*modificação do botão ao passar mouse, seja mais suave*/
+  transition: all 0.5s;
+}
+
+/*pseudo-selector*/
+/*Para ajustar modificação do botão quando passar mouse, abaixo:*/
+ul li a:hover {
+  background: var(--surface-color-hover);
+  border: 1.5px solid var(--text-color);
+}
+
+/*links sociais*/
+#social-links {
+  display: flex; /*Posição flexível*/
+  padding: 24px 0; /*24 em cima e embaixo; 0 nas laterais*/
+  font-size: 24px; /*Tamanho dos ícones*/
+  justify-content: center; /*Centraliza os elementos*/
+}
+
+#social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  transition: background 0.2s;
+  border-radius: 50%;
+}
+
+/*Criar efeito ao passar o mouse no elemento*/
+#social-links a:hover {
+  background: var(--highlight-color);
+}
+
+footer {
+  padding: 24px 0;
+  text-align: center;
+  font-size: 14px;
+}
