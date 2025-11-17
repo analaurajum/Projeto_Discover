@@ -106,14 +106,20 @@ body * {
 }
 
 .light #switch button {
-  right: 0;
-  left: initial;
+  animation: slide-in 0.4s forwards;
 }
 
 .dark #switch button {
-  left: 0;
-  right: initial;
+  animation: slide-back 0.4s forwards;
 }
+
+.light #switch button:hover{
+  outline: 8px solid var(--highlight-color);
+}
+.dark #switch button:hover{
+  outline: 8px solid var(--highlight-color);
+}
+
 
 #switch span {
   position: center;
@@ -208,5 +214,24 @@ footer {
 
   .light {
     --bg-url: url(./assets/bg-desktop-light.jpg);
+  }
+}
+
+/*--- ANIMAÇÕES ---*/
+@keyframes slide-in {
+  from {
+    left: 0;
+  }
+  to {
+    left: 50%;
+  }
+}
+
+@keyframes slide-back {
+  from {
+    right: 0;
+  }
+  to {
+    right: 50%;
   }
 }
